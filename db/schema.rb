@@ -11,10 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150301073555) do
+ActiveRecord::Schema.define(version: 20150301174454) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "actions", force: :cascade do |t|
+    t.boolean  "read"
+    t.integer  "action_type"
+    t.integer  "subject_id"
+    t.string   "subject_type"
+    t.integer  "object_id"
+    t.string   "object_type"
+    t.integer  "related_to_id"
+    t.string   "related_to_type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "actions", ["object_type", "object_id"], name: "index_actions_on_object_type_and_object_id", using: :btree
+  add_index "actions", ["related_to_type", "related_to_id"], name: "index_actions_on_related_to_type_and_related_to_id", using: :btree
+  add_index "actions", ["subject_type", "subject_id"], name: "index_actions_on_subject_type_and_subject_id", using: :btree
 
   create_table "groups", force: :cascade do |t|
     t.string   "name"

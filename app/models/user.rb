@@ -1,6 +1,8 @@
 require 'faker'
 
 class User < ActiveRecord::Base
+  after_create :log_create
+
   def self.gen_random_org
     o = Organization.new(name: Faker::Company.name, motto: Faker::Lorem.sentence)
     o.save()
@@ -17,5 +19,9 @@ class User < ActiveRecord::Base
       motto: Faker::Lorem.sentence,
       organization: org
     ).save()
+  end
+
+  def log_create
+    Action.log(self, Action::Type::JOIN_APERIO)
   end
 end
