@@ -5,7 +5,7 @@ class CreateActions < ActiveRecord::Migration
       t.integer :action_type
 
       t.references :subject, polymorphic: true, index: true
-      t.references :object, polymorphic: true, index: true
+      t.references :target, polymorphic: true, index: true
       t.references :related_to, polymorphic: true, index: true
 
       t.timestamps null: false
