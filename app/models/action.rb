@@ -7,6 +7,7 @@ class Action < ActiveRecord::Base
     JOIN_APERIO   = 0
     ORG_CREATE    = 1
     GROUP_CREATE  = 2
+    GROUP_JOIN    = 3
   end
 
   def self.log(subject, action_type, target = nil, related_to = nil)
