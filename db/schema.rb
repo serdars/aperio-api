@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150303081550) do
+ActiveRecord::Schema.define(version: 20150307061138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,11 +59,28 @@ ActiveRecord::Schema.define(version: 20150303081550) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string   "name"
-    t.string   "email"
+  create_table "user_sessions", force: :cascade do |t|
+    t.string   "session_id", null: false
+    t.text     "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name",                           null: false
+    t.string   "email",                          null: false
+    t.string   "crypted_password",               null: false
+    t.string   "password_salt",                  null: false
+    t.string   "persistence_token",              null: false
+    t.integer  "login_count",        default: 0, null: false
+    t.integer  "failed_login_count", default: 0, null: false
+    t.datetime "last_request_at"
+    t.datetime "current_login_at"
+    t.datetime "last_login_at"
+    t.string   "current_login_ip"
+    t.string   "last_login_ip"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
 end

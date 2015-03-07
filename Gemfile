@@ -33,6 +33,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# App gems
+gem 'authlogic'
+
 gem 'active_model_serializers', "~> 0.8.3"
 
 group :development, :test do
