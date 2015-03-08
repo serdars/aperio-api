@@ -15,6 +15,10 @@ Rails.application.routes.draw do
         match 'timeline', via: [ :get ]
       end
 
+      controller :organizations, path: '/organizations' do
+        match 'create', via: [ :post, :options ]
+      end
+
     end
   end
 end
