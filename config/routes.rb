@@ -1,24 +1,25 @@
 Rails.application.routes.draw do
-  namespace :api, :defaults => {:format => :json} do
-    namespace :v1 do
+  namespace :v1, :defaults => {:format => :json}  do
 
-      controller :user_sessions, path: '/sessions' do
-        match "login", via: [ :post, :options ]
-        match "logout", via: [ :delete, :options ]
-      end
-
-      controller :users, path: '/users' do
-        match 'create', via: [ :post, :options ]
-        match 'update', via: [ :put ]
-        # Dev routes
-        match 'current', via: [ :get ]
-        match 'timeline', via: [ :get ]
-      end
-
-      controller :organizations, path: '/organizations' do
-        match 'create', via: [ :post, :options ]
-      end
-
+    controller :users, path: '/users' do
+      match '', action: 'create', via: [ :post, :options ]
+      match '/:id', action: 'update', via: [ :put, :options ]
+      match '/:id', action: 'show', via: [ :get ]
     end
+
+    match '/timeline', to: 'users#timeline', via: [ :get ]
+    match '/current_user', to: 'users#current', via: [ :get ]
+
+    match 'logout', to: 'user_sessions#logout', via: [ :options, :delete]
+    match 'login', to: 'user_sessions#login', via: [ :options, :post]
+
+
+    controller :organizations, path: '/organizations' do
+      match '', action: 'create', via: [ :post, :options ]
+      match '/:id', action: 'update', via: [ :put, :options ]
+      match '/:id', action: 'destroy', via: [ :delete, :options ]
+      match '/:id', action: 'show', via: [ :get ]
+    end
+
   end
 end

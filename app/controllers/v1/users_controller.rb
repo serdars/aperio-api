@@ -1,4 +1,4 @@
-class Api::V1::UsersController < ApplicationController
+class V1::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
@@ -23,10 +23,8 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
-  # Dev methods
-
   def current
-    render json: current_user
+    render json: current_user, root: "current_user"
   end
 
   def timeline

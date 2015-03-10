@@ -1,4 +1,4 @@
-class Api::V1::OrganizationsController < ApplicationController
+class V1::OrganizationsController < ApplicationController
   def create
     @organization = Organization.new(organization_params)
 
@@ -9,6 +9,12 @@ class Api::V1::OrganizationsController < ApplicationController
         message: "Organization creation failed!"
       }, status: :bad_request
     end
+  end
+
+  def show
+    @organization = Organization.find(params[:id])
+
+    render json: @organization
   end
 
   private
