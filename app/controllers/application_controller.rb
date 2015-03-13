@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery with: :exception
   skip_before_action :verify_authenticity_token
 
+  # Shortcut to be able to create history easily.
+  before_filter :set_current_user
   # Enable CORS for easy development.
   before_filter :cors_preflight_check
   after_filter :cors_set_access_control_headers
@@ -34,6 +36,10 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user
 
   private
+    def set_current_user
+      User.set_current_user(current_user)
+    end
+
     def current_user_session
       return @current_user_session if defined?(@current_user_session)
       @current_user_session = UserSession.find
