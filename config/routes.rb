@@ -21,5 +21,11 @@ Rails.application.routes.draw do
       match '/:id', action: 'show', via: [ :get ]
     end
 
+    controller :groups, path: '/groups' do
+      match '', action: 'create', via: [ :post, :options ]
+      match '/:id', action: 'update', via: [ :put, :options ]
+      match '/:id', action: 'destroy', via: [ :delete, :options ]
+    end
+
   end
 end
