@@ -27,5 +27,11 @@ Rails.application.routes.draw do
       match '/:id', action: 'destroy', via: [ :delete, :options ]
     end
 
+    controller :memberships, path: '/memberships' do
+      match '', action: 'create', via: [ :post, :options ]
+      match '/:id', action: 'destroy', via: [ :delete, :options ]
+    end
+
+
   end
 end
