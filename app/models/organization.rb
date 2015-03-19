@@ -4,13 +4,23 @@ class Organization < ActiveRecord::Base
   after_create :log_create
   after_create :create_default_groups
 
+  def all_members_group
+    self.groups.where(system: "all_members").first
+  end
+
+  def admins_group
+    self.groups.where(system: "admins").first
+  end
+
+  private
   def create_default_groups
     Group.new({
       name: "Members",
       motto: "All members",
       visible: true,
       private: false,
-      organization: self
+      organization: self,
+      system: "all_members"
     }).save()
 
     Group.new({
@@ -18,7 +28,8 @@ class Organization < ActiveRecord::Base
       motto: "Adminstrators",
       visible: false,
       private: true,
-      organization: self
+      organization: self,
+      system: "admins"
     }).save()
   end
 

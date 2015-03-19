@@ -5,6 +5,7 @@ class CreateGroups < ActiveRecord::Migration
       t.string :motto
       t.boolean :visible
       t.boolean :private
+      t.string :system, default: ""
 
       t.belongs_to :organization, index: true
 
