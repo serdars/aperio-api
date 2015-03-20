@@ -11,6 +11,18 @@ class V1::OrganizationsController < ApplicationController
     end
   end
 
+  def update
+    @organization = Organization.find(params[:id])
+
+    if @organization.update(organization_params)
+      render json: @organization
+    else
+      render json: {
+        message: "Organization update failed!"
+      }, status: :bad_request
+    end
+  end
+
   def show
     @organization = Organization.find(params[:id])
 
