@@ -24,7 +24,6 @@ def gen_random_group(org: nil)
   Group.new(
     name: Faker::Lorem.words(2).join(" "),
     motto: Faker::Lorem.sentence,
-    visible: [ true, false ].sample,
     private: [ true, false ].sample,
     organization: org
   ).save()

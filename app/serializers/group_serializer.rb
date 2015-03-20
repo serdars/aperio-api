@@ -1,3 +1,3 @@
 class GroupSerializer < ActiveModel::Serializer
-  attributes :id, :name, :motto, :private, :visible
+  attributes :id, :name, :motto, :private
 end

@@ -4,33 +4,21 @@ class Organization < ActiveRecord::Base
   after_create :log_create
   after_create :create_default_groups
 
-  def all_members_group
-    self.groups.where(system: "all_members").first
-  end
-
   def admins_group
-    self.groups.where(system: "admins").first
+    # TODO: Find the first group created.
   end
 
   private
   def create_default_groups
-    Group.new({
-      name: "Members",
-      motto: "All members",
-      visible: true,
-      private: false,
-      organization: self,
-      system: "all_members"
-    }).save()
-
-    Group.new({
+    admin_group = Group.new({
       name: "Admins",
       motto: "Adminstrators",
-      visible: false,
       private: true,
-      organization: self,
-      system: "admins"
-    }).save()
+      organization: self
+    })
+    admin_group.save()
+
+    Membership.new(user: User.current_user, group: admin_group).save()
   end
 
   def log_create
