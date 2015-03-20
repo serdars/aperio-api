@@ -3,7 +3,7 @@ class V1::UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      render json: current_user
+      render json: @user
     else
       render json: {
         message: "User creation failed!"
@@ -24,7 +24,7 @@ class V1::UsersController < ApplicationController
   end
 
   def current
-    render json: current_user, root: "current_user"
+    render json: current_user
   end
 
   def timeline

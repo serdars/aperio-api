@@ -5,7 +5,7 @@ class V1::UserSessionsController < ApplicationController
   def login
     @user_session = UserSession.new(user_session_params)
     if @user_session.save
-      render json: current_user
+      render json: @user_session.user
     else
       render json: {
         message: "Login failed!"
