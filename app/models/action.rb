@@ -4,10 +4,11 @@ class Action < ActiveRecord::Base
   belongs_to :related_to, polymorphic: true
 
   module Type
-    JOIN_APERIO   = 0
-    ORG_CREATE    = 1
-    GROUP_CREATE  = 2
-    GROUP_JOIN    = 3
+    JOIN_APERIO       = 0
+    ORG_CREATE        = 1
+    GROUP_CREATE      = 2
+    GROUP_JOIN        = 3
+    ORGANIZATION_JOIN = 4
   end
 
   def self.log(subject, action_type, target = nil, related_to = nil)

@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   has_many :memberships
-  has_many :groups, through: :memberships
+  has_many :groups, through: :memberships, source: :joinable, source_type: "Group"
+  has_many :organizations, through: :memberships, source: :joinable, source_type: "Organization"
 
   def self.set_current_user(user)
     @current_user = user

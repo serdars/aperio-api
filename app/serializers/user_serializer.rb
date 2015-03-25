@@ -1,11 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :name, :email, :memberships, :organizations
-
-  def memberships
-    object.memberships.map do |m|
-      m.group.id
-    end
-  end
+  attributes :id, :name, :email, :organizations
 
   def organizations
     object.groups.map { |g|

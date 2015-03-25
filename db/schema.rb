@@ -46,9 +46,10 @@ ActiveRecord::Schema.define(version: 20150307061138) do
 
   create_table "memberships", force: :cascade do |t|
     t.integer  "user_id"
-    t.integer  "group_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "joinable_id"
+    t.string   "joinable_type"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "organizations", force: :cascade do |t|
