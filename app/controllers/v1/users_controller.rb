@@ -31,6 +31,19 @@ class V1::UsersController < ApplicationController
     render json: Action.all, root: "timeline"
   end
 
+  def search
+    @users = User.where("name ~* :query or email ~* :query", query: "^#{params[:query]}.*")
+    @suggestions = @users.map do |u|
+      {
+        id: u.id,
+        name: u.name,
+        email: u.email
+      }
+    end
+
+    render json: @suggestions, root: "suggestions"
+  end
+
   private
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)

@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
     match 'logout', to: 'user_sessions#logout', via: [ :options, :delete]
     match 'login', to: 'user_sessions#login', via: [ :options, :post]
-
+    match 'search', to: 'users#search', via: [ :get ]
 
     controller :organizations, path: '/organizations' do
       match '', action: 'create', via: [ :post, :options ]

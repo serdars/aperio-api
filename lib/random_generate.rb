@@ -3,7 +3,10 @@ require 'faker'
 Action.destroy_all
 
 def gen_random_user
-  User.new(name: Faker::Name.name, email: Faker::Internet.email).save()
+  User.new(name: Faker::Name.name,
+           email: Faker::Internet.email,
+           password: "1234",
+           password_confirmation: "1234").save()
 end
 
 def gen_random_org
