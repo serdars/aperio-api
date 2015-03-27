@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :memberships
+  has_many :invitations, foreign_key: 'invitee_id'
   has_many :groups, through: :memberships, source: :joinable, source_type: "Group"
   has_many :organizations, through: :memberships, source: :joinable, source_type: "Organization"
 
