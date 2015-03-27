@@ -34,6 +34,8 @@ Rails.application.routes.draw do
 
     controller :invitations, path: '/invitations' do
       match '', action: 'create', via: [ :post, :options ]
+      match '/:id/accept', action: 'accept', via: [ :post, :options ]
+      match '/:id/decline', action: 'decline', via: [ :post, :options ]
     end
   end
 end
