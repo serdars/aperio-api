@@ -1,6 +1,7 @@
 class Organization < ActiveRecord::Base
   has_many :groups
   has_many :memberships, as: :joinable
+  has_many :invitations
 
   after_create :log_create
   after_create :create_default_groups
