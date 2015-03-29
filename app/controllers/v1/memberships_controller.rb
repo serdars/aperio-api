@@ -1,5 +1,9 @@
 class V1::MembershipsController < ApplicationController
   def create
+    # TODO:
+    # This method currently takes care of a few actions:
+    # Join by intention / Add to group / Add to organization
+    # We might want to create different based for each of these.
     joinable = if params[:group_id]
       Group.find(params[:group_id])
     else
