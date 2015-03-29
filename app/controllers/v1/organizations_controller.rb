@@ -29,6 +29,17 @@ class V1::OrganizationsController < ApplicationController
     render json: @organization
   end
 
+  def timeline
+    @organization = Organization.find(params[:id])
+    t = Action.arel_table
+
+    @timeline = Action.where((t[:target_type].eq("Organization").and(t[:target_id].eq(@organization.id))).
+      or(t[:related_to_type].eq("Organization").and(t[:related_to_id].eq(@organization.id)))).
+      order(created_at: :desc).limit(20)
+
+    render json: @timeline, root: "timeline"
+  end
+
   private
   def organization_params
     params.require(:organization).permit(:name, :motto)

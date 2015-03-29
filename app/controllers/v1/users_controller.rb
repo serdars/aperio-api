@@ -28,7 +28,7 @@ class V1::UsersController < ApplicationController
   end
 
   def timeline
-    render json: Action.all, root: "timeline"
+    render json: Action.order(created_at: :desc).limit(20), root: "timeline"
   end
 
   def search

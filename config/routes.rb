@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       match '/:id', action: 'update', via: [ :put, :options ]
       match '/:id', action: 'destroy', via: [ :delete, :options ]
       match '/:id', action: 'show', via: [ :get ]
+      match '/:id/timeline', action: 'timeline', via: [ :get ]
     end
 
     controller :groups, path: '/groups' do
