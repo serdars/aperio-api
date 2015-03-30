@@ -2,6 +2,7 @@ class Group < ActiveRecord::Base
   belongs_to :organization
   has_many :memberships, as: :joinable
   has_many :users, through: :memberships, source: :user
+  has_many :conversations
 
   after_create :log_create
 

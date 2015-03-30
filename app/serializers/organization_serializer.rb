@@ -1,5 +1,5 @@
 class OrganizationSerializer < ActiveModel::Serializer
-  attributes :id, :name, :motto, :groups, :is_member, :is_admin, :invitations
+  attributes :id, :name, :motto, :groups, :is_member, :is_admin, :invitations, :conversations
 
   def groups
     object.groups.map { |g|
@@ -10,6 +10,12 @@ class OrganizationSerializer < ActiveModel::Serializer
   def invitations
     object.invitations.map { |i|
       InvitationSerializer.new(i, root: nil)
+    }
+  end
+
+  def conversations
+    object.conversations.map { |i|
+      ConversationSerializer.new(i, root: nil)
     }
   end
 end

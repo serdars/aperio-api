@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150326063134) do
+ActiveRecord::Schema.define(version: 20150330155318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,19 @@ ActiveRecord::Schema.define(version: 20150326063134) do
   add_index "actions", ["related_to_type", "related_to_id"], name: "index_actions_on_related_to_type_and_related_to_id", using: :btree
   add_index "actions", ["subject_type", "subject_id"], name: "index_actions_on_subject_type_and_subject_id", using: :btree
   add_index "actions", ["target_type", "target_id"], name: "index_actions_on_target_type_and_target_id", using: :btree
+
+  create_table "conversations", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.integer  "organization_id"
+    t.string   "title"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "conversations", ["group_id"], name: "index_conversations_on_group_id", using: :btree
+  add_index "conversations", ["organization_id"], name: "index_conversations_on_organization_id", using: :btree
+  add_index "conversations", ["user_id"], name: "index_conversations_on_user_id", using: :btree
 
   create_table "groups", force: :cascade do |t|
     t.string   "name"
@@ -59,6 +72,14 @@ ActiveRecord::Schema.define(version: 20150326063134) do
     t.string   "joinable_type"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "conversation_id"
+    t.integer  "user_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "organizations", force: :cascade do |t|
