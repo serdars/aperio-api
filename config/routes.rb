@@ -33,6 +33,10 @@ Rails.application.routes.draw do
       match '/:id', action: 'destroy', via: [ :delete, :options ]
     end
 
+    controller :conversations, path: '/conversations' do
+      match '', action: 'create', via: [ :post, :options ]
+    end
+
     controller :invitations, path: '/invitations' do
       match '', action: 'create', via: [ :post, :options ]
       match '/:id/accept', action: 'accept', via: [ :post, :options ]
